@@ -1,47 +1,34 @@
-# Astro Starter Kit: Minimal
+# Astro + Mafs Minimal Example
 
-```sh
-npm create astro@latest -- --template minimal
+This is a minimal example of an [Astro](https://astro.build) project that uses the [Mafs](https://mafs.dev) library to render a beautiful mathematical visualization.
+
+## Steps Used to Create This Project
+
+1. Make a new [Astro](https://astro.build/) project (`npm create astro@latest`). I used the `minimal` template and all of the default settings.
+
+2. Add React via the [React Astro integration](https://docs.astro.build/en/guides/integrations-guide/react/) (`npx astro add react`).
+
+3. Add [Mafs](https://mafs.dev/) via the [Mafs installation instructions](https://mafs.dev/guides/get-started/installation) (`npm install --save mafs`).
+
+4. At this point, we're mostly there! I created a React component containing the [Hello f(x)](https://mafs.dev/guides/get-started/hello-f-x) example at `src/components/demo.jsx`, imported this component into `src/pages/index.astro`, and rendered it (`<HelloFx client:load />`). (Don't forget the [client directive](https://docs.astro.build/en/reference/directives-reference/#client-directives)!)
+
+5. **Key Step**: Update `astro.config.msj` to contain the following:
+
+```
+import { defineConfig } from "astro/config";
+
+import react from "@astrojs/react";
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [react()],
+
+  vite: {
+    ssr: { noExternal: ["mafs"] },
+  },
+});
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+At this point, you should be able to `npm run dev` to start the development server and see your Mafs coordinate plane in action!
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Happy visualizing! 🚀📈
